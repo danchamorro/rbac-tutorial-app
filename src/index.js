@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/home";
 import DashboardPage from "./pages/dashboard";
 
+require("dotenv").config();
+
 function App() {
   return (
     <div className="App container">
