@@ -2,29 +2,23 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import { AuthConsumer } from "../authContext";
-import Can from "../components/Can";
-import Logout from "../components/Logout";
-import Profile from "../components/Profile";
+import Login from "../components/Login";
 import PostsList from "../components/PostsList";
 
-const DashboardPage = () => (
+const HomePage = () => (
   <AuthConsumer>
-    {({ user }) => (
-      <Can
-        role={user.role}
-        perform="dashboard-page:visit"
-        yes={() => (
-          <div>
-            <h1>Dashboard</h1>
-            <Logout />
-            <Profile />
-            <PostsList />
-          </div>
-        )}
-        no={() => <Redirect to="/" />}
-      />
-    )}
+    {({ authenticated }) =>
+      authenticated ? (
+        <Redirect to="/dashboard" />
+      ) : (
+        <div>
+          <h2>Welcome to React RBAC Tutorial.</h2>
+          <Login />
+          <PostsList />
+        </div>
+      )
+    }
   </AuthConsumer>
 );
 
-export default DashboardPage;
+export default HomePage;
